@@ -7,6 +7,8 @@ var morgan         = require('morgan');
 var bodyParser     = require('body-parser');
 var methodOverride = require('method-override');
 
+var config = require('./config/config');
+
 mongoose.connect(database.url);
 
 app.use(express.static(__dirname + '/public'));
