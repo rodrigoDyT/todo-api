@@ -1,4 +1,5 @@
 var todoController = require('./controllers/todosController')
+var userController = require('./controllers/userController')
 
 module.exports = function(app){
 
@@ -14,4 +15,15 @@ module.exports = function(app){
 		return todoController.deleteTodo(req, res)
 	});
 
+	app.put('/api/todos/update/:todo_id', function(req, res){
+		return todoController.updateTodo(req, res)	
+	});
+
+	app.post('/api/todos/getToken', function(req, res){
+		return userController.getToken(req, res)
+	});
+
+	app.post('/api/todos/createuser', function(req, res){
+		return userController.createUser(req, res)
+	})
 };
