@@ -7,5 +7,6 @@ module.exports = mongoose.model('Todo',{
 	dueDate : Date,
 	finished_at : Date,
 	done : Boolean,
-	created_at : Date
+	created_at : Date,
+	user_id : String
 });

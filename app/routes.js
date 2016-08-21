@@ -3,27 +3,17 @@ var userController = require('./controllers/userController')
 
 module.exports = function(app){
 
-	app.get('/api/todos', function(req, res){
-		return todoController.findTodo(req, res)
-	});
+	app.get('/api/todos/:todo_id',userController.authenticateUser, todoController.findTodo);
 
-	app.post('/api/todos', function(req, res){
-		return todoController.createTodo(req, res)
-	});
+	app.get('/api/todos',userController.authenticateUser, todoController.findAllTodos);
 
-	app.delete('/api/todos/:todo_id', function(req, res){
-		return todoController.deleteTodo(req, res)
-	});
+	app.post('/api/todos', userController.authenticateUser, todoController.createTodo); 
 
-	app.put('/api/todos/update/:todo_id', function(req, res){
-		return todoController.updateTodo(req, res)	
-	});
+	app.delete('/api/todos/:todo_id', userController.authenticateUser, todoController.createTodo); 
 
-	app.post('/api/todos/getToken', function(req, res){
-		return userController.getToken(req, res)
-	});
+	app.put('/api/todos/update/:todo_id', userController.authenticateUser, todoController.updateTodo); 
 
-	app.post('/api/todos/createuser', function(req, res){
-		return userController.createUser(req, res)
-	})
+	app.post('/api/todos/getToken', userController.getToken); 
+
+	app.post('/api/todos/createuser', userController.createUser); 
 };

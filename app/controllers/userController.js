@@ -6,7 +6,7 @@ exports.createUser = function(req, res){
 	var newUser = User({
 		name: req.body.name,
 		password: req.body.password,
-		admin: req.body.admin	
+		token : "12345"	
 	});
 	newUser.save(function(err){
 		if(err) res.send(500, err)
@@ -23,7 +23,7 @@ exports.getToken = function(req, res){
 			res.json({success: false, message : 'Authetication failed. Wrong credentials'})
 
 		var token = jwt.sign(user, config.secret, {
-			expiresIn : 86400
+			expiresIn : '365d'
 		});
 
 		res.json({
@@ -40,16 +40,15 @@ exports.getToken = function(req, res){
 	})
 }
 
-exports.authenticateUser = function(req, res){
-	var token = req.body.token || req.param('token') || req.headers['x-access-token'];
+exports.authenticateUser = function(req, res, next){
+	var token = req.body.token || req.params.token || req.headers['x-access-token'];
 	if(token){
 		jwt.verify(token, config.secret, function(err, decoded){
+			if(err)
+				return res.json({success: false, message: 'Failed to decode token'});
 			req.decoded = decoded;
-			next();
+			return next();
 		})
-			.catch(function(err){
-				res.json({success : false, message : 'Failed to authenticate token.'});
-			})
 	}else{
 		return res.status(403).send({
 			success: false,
