@@ -5,8 +5,7 @@ var User   = require('../models/user');
 exports.createUser = function(req, res){
 	var newUser = User({
 		name: req.body.name,
-		password: req.body.password,
-		token : "12345"	
+		password: req.body.password
 	});
 	newUser.save(function(err){
 		if(err) res.send(500, err)
