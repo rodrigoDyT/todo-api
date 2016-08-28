@@ -8,5 +8,11 @@ module.exports = mongoose.model('Todo',{
 	finished_at : Date,
 	done : Boolean,
 	created_at : Date,
-	user_id : String
+	user_id : String,
+	project_id : String,
+	recurrent: Boolean,
+	priority: String,
+	level: String,
+	tags: String,
+	nextReminder: Date
 });

@@ -1,14 +1,10 @@
 var Todo = require('../models/todo');
-
-
-var userId = function(req){
-	return req.decoded['_doc']['_id']
-}
+var utilHelper = require('../helpers/utils')
 
 exports.findAllTodos = function(req, res, next){
 	Todo.find(
 		{
-			user_id : userId(req)
+			user_id : utilHelper.modelId(req)
 		}
 		, function(err, todos){
 			if(err)
@@ -20,7 +16,7 @@ exports.findAllTodos = function(req, res, next){
 exports.findTodo = function (req, res, next){
 	Todo.find(
 		{
-			user_id : userId(req),
+			user_id : utilHelper.modelId(req),
 		    _id : req.params.todo_id	
 		}, function(err, todo){
 		if(err || !todo)
@@ -35,12 +31,15 @@ exports.createTodo = function (req, res, next){
 
 	Todo.create({
 		title : req.body.title,
-		description : req.body.description,
-		dueDate : req.body.dueDate,
+		description : req.body.description || null,
+		dueDate : req.body.dueDate || null,
 		done : false,
 		created_at : new Date(),
 		finished_at : null,
-		user_id : userId(req) 
+		user_id : utilHelper.modelId(req) ,
+		level: req.body.level || null,
+		priority: req.body.priority || null,
+		project_id: req.body.project_id || null
 	})
 		.then(function(todo){
 			req.params['todo_id'] = todo._id
