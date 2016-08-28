@@ -10,7 +10,7 @@ var projectController = require('../app/controllers/projectsController');
 chai.use(chaiHttp);
 
 describe('When CRUDING Todos', function() {
-	var token = "";
+	var userToken = "";
 	before(function(done){
 		chai.request(server)
 			.post('/api/createuser')	
@@ -22,16 +22,29 @@ describe('When CRUDING Todos', function() {
 			.post('/api/getToken')
 			.send({'name': 'johnsmithtest', 'password': 'janebabelove'})
 			.end(function(err, res){
-				token = res.body.token;
+				userToken = res.body.token;
 				done();
-			})
+			});
 	});
-	it('should list zero todos of a USER', function(done) {
+	before(function(done){
+		chai.request(server)
+			.post('/api/todos')
+			.send({"title": 'The one to test travis', 
+				   dueDate : '2016-09-13',
+				   description : 'Test Travis CI',
+				   level : 'Easy',
+				   priority : '1',
+				   "token" : userToken})
+			.end(function(err, res){
+				done();
+			});
+	})
+	it('should list 1 todo of User', function(done){
 		chai.request(server)
 			.get('/api/todos')
-			.send({'token': token})
+			.send({"token": userToken})
 			.end(function(err, res){
-				res.body.should.have.length(0);
+				res.body.should.have.length(1);
 				done();
 			});
 	});
