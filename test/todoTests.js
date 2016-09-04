@@ -15,30 +15,26 @@ describe('When CRUDING Todos', function() {
 		chai.request(server)
 			.post('/api/createuser')	
 			.send({'name': 'johnsmithtest', 'password': 'janebabelove'})
-			.end(function(err, res){
-				console.log('test user created successfully');
-			})
-		chai.request(server)
-			.post('/api/gettoken')
-			.send({'name': 'johnsmithtest', 'password': 'janebabelove'})
-			.end(function(err, res){
+			.then(function(res){
 				userToken = res.body.token;
-				done();
+			})
+			.then(function(){
+				chai.request(server)
+					.post('/api/todos')
+					.send({"title": 'The one to test travis', 
+						dueDate : '2016-09-13',
+						description : 'Test Travis CI',
+						level : 'Easy',
+						priority : '1',
+						"token" : userToken})
+					.end(function(err, res){
+						done();
+					});
+			})
+			.catch(function(err){
+				console.log(err);
 			});
 	});
-	before(function(done){
-		chai.request(server)
-			.post('/api/todos')
-			.send({"title": 'The one to test travis', 
-				   dueDate : '2016-09-13',
-				   description : 'Test Travis CI',
-				   level : 'Easy',
-				   priority : '1',
-				   "token" : userToken})
-			.end(function(err, res){
-				done();
-			});
-	})
 	it('should list 1 todo of User', function(done){
 		chai.request(server)
 			.get('/api/todos')

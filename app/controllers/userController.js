@@ -9,7 +9,7 @@ exports.createUser = function(req, res){
 	});
 	newUser.save(function(err){
 		if(err) res.send(500, err)
-		res.json({message: 'User created successfully', success : false})
+		exports.getToken(req, res);
 	});
 }
 
@@ -22,7 +22,7 @@ exports.getToken = function(req, res){
 			res.json({success: false, message : 'Authetication failed. Wrong credentials'})
 
 		var token = jwt.sign(user, config.secret, {
-			expiresIn : '365d'
+			expiresIn : '5h'
 		});
 
 		res.json({
