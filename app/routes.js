@@ -24,7 +24,7 @@ module.exports = function(app){
 
 	app.put('/api/projects/:project_id', userController.authenticateUser, projectsController.updateProject); 
 
-	app.post('/api/getToken', userController.getToken); 
+	app.post('/api/gettoken', userController.getToken); 
 
 	app.post('/api/createuser', userController.createUser); 
 };

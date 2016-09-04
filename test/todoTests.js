@@ -19,7 +19,7 @@ describe('When CRUDING Todos', function() {
 				console.log('test user created successfully');
 			})
 		chai.request(server)
-			.post('/api/getToken')
+			.post('/api/gettoken')
 			.send({'name': 'johnsmithtest', 'password': 'janebabelove'})
 			.end(function(err, res){
 				userToken = res.body.token;
