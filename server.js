@@ -9,8 +9,6 @@ var methodOverride = require('method-override');
 
 var config = require('./config/config');
 
-// mongoose.connect(database.url_test);
-
 // Configure express
 // Credits to http://blog.wercker.com/2013/06/21/Getting-started-with-Node-Mongoose-MongoDB-Part2.html
 mongoose.connect(process.env.NODE_ENV == 'production' ?
@@ -26,5 +24,5 @@ app.use(methodOverride());
 require('./app/routes')(app);
 
 app.listen(port);
-console.log("App listening on port" + port);
+console.log("App listening on port " + port);
 module.exports = app;
