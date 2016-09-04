@@ -1,6 +1,6 @@
 {
 	"name"         : "node-rod-todo",
-	"version"      : "0.0.1",
+	"version"      : "1.0.1",
 	"description"  : "Breaking the ice with Javascript Through an API",
 	"main"         : "server.js",
 	"author"       : "Rodrigo",
