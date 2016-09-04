@@ -1,5 +1,12 @@
 language: node_js
 node_js:
-  - 6.2.1
+- 6.2.1
 services:
-  - mongodb
+- mongodb
+deploy:
+  provider: heroku
+  api_key:
+    secure: SmMTx7rT/ON3iZIhzyzBdJpo0TQQDStoYn//e7V6r7X6V07dO0yN3LGmLiBIlbaFT2GZBkrycDr9LVmNK+MaLwVMo5r9yQgdkOYSpgCOOXr6T8vgZzL6/lrp8TH3va3EC/akA8MCk1brDIeq9NhLt8af6uDJylmLi4mx/IFG8jA7TbaKHPpyAXATDcyKpg0w9cOiSVXW+W1daVUiHpA6dIQL8eCKjlTI5tlvcSqjVWTIApq8aiCZyTBEayma0RiN3gGQbghr8xR8vQ73rv71pfqGUlD4nI8MQfjpdL7+PnKqyBJFVNDKBTyDoNGVrx0UPoy/VCGOJErGa/RTbU+weOqMl6J2E8CLlxfMlXmqm/9XX5sj3PzCIuNV80IE0g0HgJcbF2mczO4q4RRBWxYi+jwiOZPllBen2T7WCatj7Ho7mCd6QBUwMgNlLFRJXRTBF338JTDLfxFjSXXpmOwVaCwPKQmOGEONY9t/AmAIxFZaqtDc0TNdWypzXWh3aDoEcv3tCe48/gsy4OsqqvJmq4zrh9fD3A28bU16S4qqXHT+soknzTTLzuwvr6vSmjmFVLJX+NExeYzoLopNaHKknC89oxHTd4VCywEodGgiilEXsr5S9dUKyw2UCX38VCr0Pagh6X1QldsiwUKSvR79IVxzLpBOrfj+L/k/gWT3l60=
+  app: api-rodrigo-todo
+  on:
+    repo: rodrigoDyT/todo-api
