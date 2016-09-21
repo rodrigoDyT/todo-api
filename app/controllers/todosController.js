@@ -20,7 +20,7 @@ exports.findTodo = function (req, res, next){
 		    _id : req.params.todo_id	
 		}, function(err, todo){
 		if(err || !todo)
-			res.status(404).send('No TODO fount with this ID')
+			res.status(404).send('No TODO found with this ID')
 		res.status(200).send(todo)
 	})
 }
