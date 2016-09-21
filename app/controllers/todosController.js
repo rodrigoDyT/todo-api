@@ -1,5 +1,5 @@
 var Todo = require('../models/todo');
-var utilHelper = require('../helpers/utils')
+var utilHelper = require('../helpers/utils');
 
 exports.findAllTodos = function(req, res, next){
 	Todo.find(
@@ -8,8 +8,8 @@ exports.findAllTodos = function(req, res, next){
 		}
 		, function(err, todos){
 			if(err)
-				res.send(500, err)
-			res.send(todos)
+				res.status(500).send(err)
+			res.status(200).send(todos)
 		})
 }
 
@@ -20,14 +20,14 @@ exports.findTodo = function (req, res, next){
 		    _id : req.params.todo_id	
 		}, function(err, todo){
 		if(err || !todo)
-			res.send(404, 'No TODO found with this ID')
-		res.send(todo)
+			res.status(404).send('No TODO fount with this ID')
+		res.status(200).send(todo)
 	})
 }
 
 exports.createTodo = function (req, res, next){
 	if (!req.body.title)
-		return res.send("Not valid data for this TODO")
+		return res.status(403).send('Not valid data for this TODO')
 
 	Todo.create({
 		title : req.body.title,
@@ -46,7 +46,7 @@ exports.createTodo = function (req, res, next){
 			exports.findTodo(req, res, next)
 		})
 		.catch(function(err){
-			res.send(err)
+			res.status(500).send(err)
 		})
 }
 
@@ -67,7 +67,7 @@ exports.deleteTodo = function (req, res, next){
 	})
 		.then(this.findTodo(req, res))
 		.catch(err, function(){
-			res.send(err)
+			res.status(500).send(err)
 		})
 }
 

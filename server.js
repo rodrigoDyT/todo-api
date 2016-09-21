@@ -15,7 +15,6 @@ mongoose.connect(process.env.NODE_ENV == 'production' ?
 	database.url_production : database.url_test );
 
 app.use(express.static(__dirname + '/public'));
-app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({'extended': 'true'}));
 app.use(bodyParser.json());
 app.use(bodyParser.json({type: 'application/vnd.api+json'}));

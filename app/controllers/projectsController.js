@@ -1,5 +1,5 @@
 var Project = require('../models/project');
-var utilHelper = require('../helpers/utils')
+var utilHelper = require('../helpers/utils');
 
 exports.findAllProjects = function(req, res, next){
 	Project.find(
@@ -27,7 +27,7 @@ exports.findProject = function (req, res, next){
 
 exports.createProject = function (req, res, next){
 	if (!req.body.title || !utilHelper.modelId(req))
-		return res.send("Not valid data for this project")
+		return res.send(403, "Not valid data for this project")
 
 	Project.create({
 		title : req.body.title,

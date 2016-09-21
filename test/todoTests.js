@@ -1,3 +1,5 @@
+var moment = require('moment');
+var expect = require('expect');
 var chai = require('chai');
 var chaiHttp = require('chai-http');
 var server = require('../server');
@@ -17,12 +19,10 @@ describe('When CRUDING Todos', function() {
 			.send({'name': 'johnsmithtest', 'password': 'janebabelove'})
 			.then(function(res){
 				userToken = res.body.token;
-			})
-			.then(function(){
 				chai.request(server)
 					.post('/api/todos')
 					.send({"title": 'The one to test travis', 
-						dueDate : '2016-09-13',
+						dueDate : moment().add(7, 'days'),
 						description : 'Test Travis CI',
 						level : 'Easy',
 						priority : '1',
@@ -39,9 +39,20 @@ describe('When CRUDING Todos', function() {
 		chai.request(server)
 			.get('/api/todos')
 			.send({"token": userToken})
-			.end(function(err, res){
-				res.body.should.have.length(1);
+			.end(function(err, response){
+				response.res.body.should.have.length(1);
+				response.res.should.have.status(200);
 				done();
 			});
 	});
+
+	it('should get 404 as response', function(done){
+		chai.request(server)
+			.get('/api/todos/123')
+			.send({'token': userToken})
+			.end(function(err, response){
+				response.res.should.have.status(404);
+			});
+	});
+
 });
