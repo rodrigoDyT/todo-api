@@ -16,7 +16,7 @@ describe('When CRUDING Todos', function() {
 	before(function(done){
 		chai.request(server)
 			.post('/api/createuser')	
-			.send({'name': 'johnsmithtest', 'password': 'janebabelove'})
+			.send({'name': 'johnsmithtest', 'email' : 'john.smith@emailg.com', 'password': 'janebabelove'})
 			.then(function(res){
 				userToken = res.body.token;
 				chai.request(server)
