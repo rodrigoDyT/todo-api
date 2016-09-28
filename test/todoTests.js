@@ -45,14 +45,4 @@ describe('When CRUDING Todos', function() {
 			});
 	});
 
-	// it('should get 404 as response', function(done){
-	// 	chai.request(server)
-	// 		.get('/api/todos/123')
-	// 		.send({'token': userToken})
-	// 		.end(function(err, res){
-	// 			// expect(res).to.have.status(404);
-	// 			res.should.have.status(404);
-	// 		});
-	// });
-
 });

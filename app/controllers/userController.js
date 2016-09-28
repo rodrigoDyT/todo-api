@@ -5,6 +5,7 @@ var User   = require('../models/user');
 exports.createUser = function(req, res){
 	var newUser = User({
 		name: req.body.name,
+		email : req.body.email,
 		password: req.body.password
 	});
 	newUser.save(function(err){
@@ -15,7 +16,7 @@ exports.createUser = function(req, res){
 
 exports.getToken = function(req, res){
 	User.findOne({
-		name: req.body.name
+		name: req.body.email
 	})
 	.then(function(user){
 		if(!user || (req.body.password != user.password))
