@@ -3,7 +3,10 @@ mongoose.Promise = global.Promise;
 
 module.exports = mongoose.model('User', {
 	name : String,
-	email : String,
+	email : {
+		type: String,
+		unique : true
+	}
 	password : String,
 	token : String
 });
