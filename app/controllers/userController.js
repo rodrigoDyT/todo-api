@@ -9,7 +9,7 @@ exports.createUser = function(req, res){
 		password: req.body.password
 	});
 	newUser.save(function(err){
-		if(err) res.send(500, err)
+		if(err) res.status(500).send(err)
 		exports.getToken(req, res);
 	});
 }
