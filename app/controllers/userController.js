@@ -15,6 +15,7 @@ exports.createUser = function(req, res){
 }
 
 exports.getToken = function(req, res){
+	console.log(req.param('email'))
 	console.log(req.body.email)
 	User.findOne({
 		email: req.body.email
