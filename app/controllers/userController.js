@@ -19,7 +19,7 @@ exports.getToken = function(req, res){
 		email: req.param('email')
 	})
 	.then(function(user){
-		if(!user || (req.body.password != user.password))
+		if(!user || (req.param('password') != user.password))
 			res.json({success: false, message : 'Authetication failed. Wrong credentials'})
 
 		var token = jwt.sign(user, config.secret, {
