@@ -16,7 +16,7 @@ exports.createUser = function(req, res){
 
 exports.getToken = function(req, res){
 	User.findOne({
-		email: req.params.email
+		email: req.param('email')
 	})
 	.then(function(user){
 		if(!user || (req.body.password != user.password))
