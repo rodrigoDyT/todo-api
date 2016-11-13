@@ -16,10 +16,10 @@ exports.createUser = function(req, res){
 
 exports.getToken = function(req, res){
 	User.findOne({
-		email: req.param('email')
+		email: req.query.email
 	})
 	.then(function(user){
-		if(!user || (req.param('password') != user.password))
+		if(!user || (req.query.password != user.password))
 			res.json({success: false, message : 'Authetication failed. Wrong credentials'})
 
 		var token = jwt.sign(user, config.secret, {
